@@ -31,7 +31,7 @@ def guestbook_key(guestbook_name = DEFAULT_GUESTBOOK_NAME):
 
 class Greeting(ndb.Model):
   author = ndb.UserProperty()
-  author = nbd.StringProperty(indexed=False)
+  author = ndb.StringProperty(indexed=False)
   date = ndb.DateTimeProperty(auto_now_add=True)
 
 class MainPage(webapp2.RequestHandler):
