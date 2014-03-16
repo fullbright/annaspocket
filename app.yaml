@@ -1,7 +1,8 @@
 application: annaspocket
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /css
@@ -9,4 +10,4 @@ handlers:
 - url: /js
   static_dir: js
 - url: /.*
-  script: helloworld.py
+  script: helloworld.application
