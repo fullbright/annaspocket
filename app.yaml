@@ -10,4 +10,8 @@ handlers:
 - url: /js
   static_dir: js
 - url: /.*
-  script: helloworld.application
+  script: guestbook.application
+
+libraries:
+- name: webapp2
+  version: latest
