@@ -31,7 +31,7 @@ def guestbook_key(guestbook_name = DEFAULT_GUESTBOOK_NAME):
 
 class Greeting(ndb.Model):
   author = ndb.UserProperty()
-  author = ndb.StringProperty(indexed=False)
+  content = ndb.StringProperty(indexed=False)
   date = ndb.DateTimeProperty(auto_now_add=True)
 
 class MainPage(webapp2.RequestHandler):
@@ -46,7 +46,9 @@ class MainPage(webapp2.RequestHandler):
       if greeting.author:
         self.response.write("<b>%s</b> wrote : " % greeting.author.nickname())
       else:
-        self.response.write('<blockquote>%s</blockquote>' % cgi.escape(greeting.content))
+        self.response.write("<b>Anonymous person wrote : </b>")
+      
+      self.response.write('<blockquote>%s</blockquote>' % cgi.escape(greeting.content))
         
     if users.get_current_user():
       url = users.create_logout_url(self.request.uri)
@@ -55,8 +57,8 @@ class MainPage(webapp2.RequestHandler):
       url = users.create_login_url(self.request.uri)
       url_linktext = "Login"
       
-    sign_query_params = urllib.urlencode({'guestbook_name', guestbook_name})
-    self.response.write(MAIN_PAGE_FOOTER_TEMPLATE % (sign_query_params, cgi.escape(guestbook_name), url, urllinktext))
+    sign_query_params = urllib.urlencode({'guestbook_name' : guestbook_name})
+    self.response.write(MAIN_PAGE_FOOTER_TEMPLATE % (sign_query_params, cgi.escape(guestbook_name), url, url_linktext))
 
 class Guestbook(webapp2.RequestHandler):
   def post(self):
