@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% autoescape true %} 
+<html>
+  <body>
+    {% for greeting in greetings %}
+      {% if greeting.author %}
+        <b>{{ greeting.author.nickname() }} wrote :</b>
+      {% else %}
+        <b>Anonymous user wrote :</b>
+      {% endif %}
+      
+      <blockquote>{{ greeting.content }}</blockquote>
+    {% endfor %}
+    
+    <form action="/sign?%guestbook_name={{ guestbook_name }}" method="post">
+      <div><textarea name="content" cols="60" rows="3"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+  
+    <hr>
+  
+    <form>Guestbook name:
+      <input name="guestbook_name" value="{{ guestbook_name }}">
+      <input type="submit" value"switch">
+    </form>
+  
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+    
+  </body>
+</html>
+{% endautoescape %}
